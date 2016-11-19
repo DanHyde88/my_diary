@@ -19,21 +19,13 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @events = @user.events.order(date: :asc)
   end
 
   private
 
   def user_params
     params.require(:user).permit(:name, :email)
-  end
-
-  def correct_user
-    @user = User.find(params[:id])
-    redirect_to login_path unless @user == current_user
-  end
-
-  def current_user
-    current_user = User.find(session[:current_user_id])
   end
 
 end
