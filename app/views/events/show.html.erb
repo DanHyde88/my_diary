@@ -1,0 +1,26 @@
+<div class='container'>
+    <div class='text-center'>
+        <h1><%= @event.title %></h1>
+        <h3><%= flash.notice %>
+    </div>
+    <div class='panel panel-primary'>
+        <div class='panel-heading'><h3 class='panel-title'><%= @event.title %></h3> <%= @event.date %></div>
+        <div class='panel-body'>
+            <p>
+                <% if Invite.where(attendee: current_user, attended_event: @event).any? %>
+                    Attending <%= link_to 'leave', invites_destroy_path(event_id: @event.id), method: :post %>
+                <% elsif current_user != @event.creator && current_user != @event.attendees.any? %>
+                    <%= link_to 'Attend', invites_create_path(event_id: @event.id), method: :post %>
+                <% else %>
+                    Your event
+                <% end %>
+            </p>
+            <p>Created by: <%= @event.creator.name %> </p>
+            <p>Location: <%= @event.location %></p>
+            <p>Description: <%= @event.description %></p>     
+        </div>
+    </div>
+    <div class='text-center'
+        <h4><%= link_to 'Back', events_path %></h4>
+    </div>
+</div>

@@ -12,5 +12,14 @@ class Event < ApplicationRecord
     validates :description,
         presence: true
 
+
+    def self.previous_events
+        self.where('date < ?', Time.current)
+    end
+
+    def self.future_events
+        self.where('date > ?', Time.current)
+    end
+
     #delegate :title, :location, :description, :date, to: :?? Look at this if law of demeter broken??
 end

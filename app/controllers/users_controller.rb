@@ -18,8 +18,9 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
-    @events = @user.events.order(date: :asc)
+    @past_events = current_user.events.previous_events.order(date: :asc)
+    @future_events = current_user.events.future_events.order(date: :asc)
+    @invites = Invite.where(attendee: current_user)
   end
 
   private
