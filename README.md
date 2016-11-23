@@ -8,20 +8,7 @@ This README would normally document whatever steps are necessary to get the
 application up and running.
 
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* Outline - Build a site similar to a private Eventbrite which allows users to create events 
+and attend events. A user can create events. A user can attend many events. An event can be 
+attended by many users. This will require you to model a many-to-many relationship and also 
+to be very conscious about your foreign keys and class names.
