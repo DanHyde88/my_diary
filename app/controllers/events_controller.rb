@@ -13,9 +13,10 @@ class EventsController < ApplicationController
     @event.save
 
     if @event.save
+      flash.notice = 'Event successfully created'
       redirect_to user_path(current_user)
     else
-      flash.now.notice = 'Event could not be created.'
+      flash.now.notice = 'Event could not be created'
       render 'new'
     end
   end
@@ -25,6 +26,6 @@ class EventsController < ApplicationController
   end
 
   def event_params
-    params.require(:event).permit(:title, :location,:description, :date, :attendee)
+    params.require(:event).permit(:title, :location,:description, :date)
   end
 end

@@ -1,68 +1,79 @@
 <div class='container'>
     <div class='text-center'>
         <h1><%= current_user.name.capitalize %>'s Diary</h1>
-        <h3><%= flash.notice %>
+        <%= render partial: 'layouts/notice' %>
     </div>
-    <h3>Past Host Events</h3>
-    <div class="table-responsive">          
-        <table class="table table-bordered">
-            <thead>
-            <tr>
-                <th>Date</th>
-                <th>Title</th>
-                <th>Location</th>
-                <th>Attending</th>
-                <th>Show</th>
-            </tr>
-            </thead>
-            <tbody>
-                <% @past_events.each do |event| %>
-                    <tr>
-                        <td><%= event.date %></td>
-                        <td><%= event.title %></td>
-                        <td><%= event.location %></td>
-                        <td>
-                            <% event.attendees.each do |attendee| %>
-                                <%= attendee.name %>
-                            <% end %>
-                        </td>
-                        <td><%= link_to 'show', event_path(event) %> </td>
-                    </tr>
-                <% end %>
-            </tbody>
-        </table>
-    </div>
-    <h3>Future Host Events</h3>
-    <div class="table-responsive">          
-        <table class="table table-bordered">
-            <thead>
-            <tr>
-                <th>Date</th>
-                <th>Title</th>
-                <th>Location</th>
-                <th>Attending</th>
-                <th>Show</th>
-            </tr>
-            </thead>
-            <tbody>
-                <% @future_events.each do |event| %>
-                    <tr>
-                        <td><%= event.date %></td>
-                        <td><%= event.title %></td>
-                        <td><%= event.location %></td>
-                        <td>
-                            <% event.attendees.each do |attendee| %>
-                                <%= attendee.name %>
-                            <% end %>
-                        </td>
-                        <td><%= link_to 'show', event_path(event) %> </td>
-                    </tr>
-                <% end %>
-            </tbody>
-        </table>
-    </div>
-    <h3>Attending Events</h3>
-    <% if @invites != nil %>
+    <br />
+    <h3>Past events you hosted</h3>
+    <% if @past_events.any? %>
+        <div class="table-responsive">          
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Title</th>
+                    <th>Location</th>
+                    <th>Attending</th>
+                    <th>Show</th>
+                </tr>
+                </thead>
+                <tbody>
+                    <% @past_events.each do |event| %>
+                        <tr>
+                            <td><%= event.date %></td>
+                            <td><%= event.title %></td>
+                            <td><%= event.location %></td>
+                            <td>
+                                <% event.attendees.each do |attendee| %>
+                                    <%= attendee.name %>
+                                <% end %>
+                            </td>
+                            <td><%= link_to 'show', event_path(event) %> </td>
+                        </tr>
+                    <% end %>
+                </tbody>
+            </table>
+        </div>
+    <% else %>
+        <p> You haven't hosted any events.</p>
+    <% end %>
+
+    <h3>Future events you're hosting</h3>
+    <% if @future_events.any? %>
+        <div class="table-responsive">          
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Title</th>
+                    <th>Location</th>
+                    <th>Attending</th>
+                    <th>Show</th>
+                </tr>
+                </thead>
+                <tbody>
+                    <% @future_events.each do |event| %>
+                        <tr>
+                            <td><%= event.date %></td>
+                            <td><%= event.title %></td>
+                            <td><%= event.location %></td>
+                            <td>
+                                <% event.attendees.each do |attendee| %>
+                                    <%= attendee.name %>
+                                <% end %>
+                            </td>
+                            <td><%= link_to 'show', event_path(event) %> </td>
+                        </tr>
+                    <% end %>
+                </tbody>
+            </table>
+        </div>
+    <% else %>
+        <p> You have no future events planned.</p>
+    <% end %>
+
+    <h3>Events you are attending</h3>
+    <% if @invites.any? %>
         <div class="table-responsive">          
             <table class="table table-bordered">
                 <thead>

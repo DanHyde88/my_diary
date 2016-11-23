@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   #get 'invites/create' => 'invites#create'
 
-  root to: 'users#new'
+  root to: 'static_pages#home'
   resources :users, only: [:new, :create, :show]
 
   resources :user_sessions, only: [:new, :create, :destroy ]
